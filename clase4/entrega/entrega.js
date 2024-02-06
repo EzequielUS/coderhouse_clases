@@ -2,7 +2,6 @@ const fs = require('fs')
 
 class ProductManager {
     constructor () {
-        this.products = []
         this.path = './productos.json'
     }
 
@@ -14,79 +13,87 @@ class ProductManager {
             return;
         }
 
-        if (this.products.some(prod => prod.code === product.code)){
+        let products = this.getProducts();
+        if (products.some(prod => prod.code === product.code)){
             console.log("Error: El código ingresado ya existe en otro producto.");
             return;
         }
 
         product.id = ProductManager.productIdCounter;
         ProductManager.productIdCounter += 1;
-        
-        let jsonProduct = JSON.stringify(product);
+
+        this.save(product);
+    }
+
+    getProducts() {
+        return this.read()
+    }
+
+    getProductById(id){
+        let products = this.getProducts()
+        let product = products.find(prod => prod.id === id)
+
+        if (!product) {
+            console.log('Not found');
+            return;
+        }
+
+        return product
+    }
+
+    updateProduct(id, updatedProduct){
+    }
+
+    deleteProduct(id){
+
+    }
+
+    save(product){
+        let jsonProduct = JSON.stringify(product, null, 2);
         if (!fs.existsSync(this.path)) {
             fs.writeFileSync(this.path, jsonProduct);
         }
         else {
             fs.appendFileSync(this.path, jsonProduct);
         }
-
     }
 
-    getProducts() {
+    read(){
         let products = []
-        if (!fs.existsSync(this.path)) {
+        if (fs.existsSync(this.path)) {
             products = fs.readFileSync(this.path);
             products = JSON.parse(products);
         }
-
         return products
     }
-
-    getProductById(id){
-        let product = this.products.find(prod => prod.id === id)
-
-        if (!product) {
-            console.log('Not found');
-        }
-
-        return product
-    }
-
-    updateProduct(id){
-
-    }
-
-    deleteProduct(id){
-        
-    }
 }
 
-let product1 = {
-    'title': 'test',
-    'description': 'test',
-    'price': 100,
-    'thumbnail': 'test.png',
-    'code': 1,
-    'stock': 100,
-}
+// let product1 = {
+//     'title': 'test',
+//     'description': 'test',
+//     'price': 100,
+//     'thumbnail': 'test.png',
+//     'code': 1,
+//     'stock': 100,
+// }
 
-let product2 = {
-    'title': 'test',
-    'description': 'test',
-    'price': 100,
-    'thumbnail': 'test.png',
-    'code': 2,
-    'stock': 100,
-}
+// let product2 = {
+//     'title': 'test',
+//     'description': 'test',
+//     'price': 100,
+//     'thumbnail': 'test.png',
+//     'code': 2,
+//     'stock': 100,
+// }
 
-// Testing
-const manager = new ProductManager();
+// // Testing
+// const manager = new ProductManager();
 
-// get current products
-let currentProducts = manager.getProducts();
-console.log('Productos actuales:', currentProducts);
+// // get current products
+// let currentProducts = manager.getProducts();
+// console.log('Productos actuales:', currentProducts);
 
-// // add new product
+// add new product
 // manager.addProduct(product1);
 // currentProducts = manager.getProducts();
 // console.log('Productos actuales:', currentProducts);
