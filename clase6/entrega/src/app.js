@@ -16,14 +16,18 @@ app.get('/', (req, res) => {
 
 // ruta: /products
 app.get('/products', (req, res) => {
+    let limit = req.query.limit
     products = manager.getProducts();
+    if (limit){
+        products = products.slice(0, limit);
+    }
     res.send(products);
 })
 
-// ruta: /products/:id
-app.get('/products/:id', (req, res) => {
-    let id = parseInt(req.params.id);
-    product = manager.getProductById(id);
+// ruta: /products/:pid
+app.get('/products/:pid', (req, res) => {
+    let pid = parseInt(req.params.pid);
+    product = manager.getProductById(pid);
     res.send(product);
 })
 
