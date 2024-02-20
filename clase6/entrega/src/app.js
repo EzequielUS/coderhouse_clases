@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 // ruta: /products
 app.get('/products', (req, res) => {
-    let limit = req.query.limit
+    let limit = req.query.limit;
     products = manager.getProducts();
     if (limit){
         products = products.slice(0, limit);
