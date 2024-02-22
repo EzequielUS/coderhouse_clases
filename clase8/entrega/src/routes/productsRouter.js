@@ -13,13 +13,13 @@ productRouter.get("/", (req, res) => {
     if (limit){
         products = products.slice(0, limit);
     }
-    res.status(200).send(products);
+    res.status(200).json(products);
 })
 
 productRouter.get("/:pid", (req, res) => {
     let pid = parseInt(req.params.pid);
     product = manager.getProductById(pid);
-    res.status(200).send(product);
+    res.status(200).json(product);
 })
 
 productRouter.post("/", (req, res) => {})
