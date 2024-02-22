@@ -11,24 +11,31 @@ class ProductManager {
         // Check that the product meets all the requested fields
         if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
             console.log("Error: Todos los campos son obligatorios.");
-            return;
+            return 1;
         }
-
-        // Set product id
-        product.id = ProductManager.productIdCounter;
 
         // Check that the are not already products with that id
         let products = this.getProducts();
         if (products.some(prod => prod.id === product.id)){
             console.log("Error: El código ingresado ya existe en otro producto.");
-            return;
+            return 1;
             }
 
-        // Append product to products list
-        products.push(product);
+        // Get current id
+        let currentId = ProductManager.productIdCounter;
+        if (products) {
+            currentId = products.reduce((max, prod) => (prod.id > max ? prod.id : max), 0);
+            ProductManager.productIdCounter = currentId;
+        }
 
         // Increment ID counter
         ProductManager.productIdCounter += 1;
+
+        // Set product id
+        product.id = ProductManager.productIdCounter;
+
+        // Append product to products list
+        products.push(product);
 
         // Save new product list into the file
         this.save(products);
@@ -101,8 +108,10 @@ class ProductManager {
     read(){
         let products = []
         if (fs.existsSync(this.path)) {
-            products = fs.readFileSync(this.path);
-            products = JSON.parse(products);
+            const data = fs.readFileSync(this.path, 'utf8');
+            if (data.trim() !== '') { // Verifica si el archivo no está vacío
+                products = JSON.parse(data);
+            }
         }
         return products
     }
