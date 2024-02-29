@@ -6,24 +6,29 @@ const CartManager = require('../cartManager')
 const path = './carritos.json'
 const manager = new CartManager(path);
 
-cartsRouter.get("/:cid", () => {
+cartsRouter.get("/:cid", (req, res) => {
     let cid = parseInt(req.params.cid);
     let products = manager.getCartById(cid);
     res.status(200).json({ success: true, message: products });
 })
 
-cartsRouter.post("/", () => {
+cartsRouter.post("/", (req, res) => {
     let products = req.body;
     manager.createCart(products);
     res.status(200).json({ success: true, message: 'El carrito se creo exitosamente' });
     }
 )
 
-cartsRouter.post("/:cid/product/:pid", () => {
-    let cid = req.query.cid;
-    let pid = req.query.pid;
-    manager.addProduct(cid, pid);
-    res.status(200).json({ success: true, message: 'El producto se agrego exitosamente' });
+cartsRouter.post("/:cid/product/:pid", (req, res) => {
+    let cid = parseInt(req.params.cid);
+    let pid = parseInt(req.params.pid);
+    let result = manager.addProduct(cid, pid);
+
+    if (result === 1) {
+        res.status(500).json({ success: false, message: 'Hubo un error al agregar el producto' })
+    } else {
+        res.status(200).json({ success: true, message: 'El producto se agregó exitosamente' });
+    }
     }
 )
 

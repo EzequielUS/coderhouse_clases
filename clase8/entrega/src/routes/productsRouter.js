@@ -36,14 +36,14 @@ productRouter.put("/:pid", (req, res) => {
     product = req.body;
     let pid = parseInt(req.params.pid)
     manager.updateProduct(pid, product)
-    res.status(200).json({ success: true, message: product });
+    res.status(200).json({ success: true, message: "El producto se actualizo exitosamente" });
 })
 
 
 productRouter.delete("/:pid", (req, res) => {
     let pid = parseInt(req.params.pid)
     manager.deleteProduct(pid)
-    res.status(200).json({ success: true, message: product });
+    res.status(200).json({ success: true, message: 'El producto se elimino exitosamente' });
 })
 
 

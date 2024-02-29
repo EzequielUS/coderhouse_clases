@@ -2,19 +2,12 @@
   {
     "title": "producto prueba",
     "description": "Este es un producto prueba",
-    "price": 200,
+    "price": 999999999999999,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
-    "id": 1
-  },
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": "abc123",
-    "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 2
   },
   {
@@ -22,8 +15,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 3
   },
   {
@@ -31,8 +26,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 4
   },
   {
@@ -40,8 +37,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 5
   },
   {
@@ -49,8 +48,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 6
   },
   {
@@ -58,8 +59,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 7
   },
   {
@@ -67,8 +70,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 8
   },
   {
@@ -76,8 +81,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 9
   },
   {
@@ -85,8 +92,10 @@
     "description": "Este es un producto prueba",
     "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "entrega8",
     "stock": 25,
+    "status": true,
+    "category": "ejemplo",
     "id": 10
   }
 ]

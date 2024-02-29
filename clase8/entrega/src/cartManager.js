@@ -81,6 +81,7 @@ class CartManager {
 
         // Save new product list into the file
         this.save(carts);
+        return 0;
     }
 
 
