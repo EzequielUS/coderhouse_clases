@@ -59,39 +59,29 @@ class CartManager {
 
     }
 
-    // addProduct(product) {
-    //     // Check that the product meets all the requested fields
-    //     if (!product.title || !product.description || !product.price || !product.category || !product.code || !product.stock || !product.status) {
-    //         console.log("Error: Todos los campos son obligatorios.");
-    //         return 1;
-    //     }
+    addProduct(cid, pid) {
+        // Check if that cart id exists
+        let carts = this.getCarts();
+        let cartIndexToUpdate = carts.findIndex(cart => cart.id === cid);
 
-    //     // Check that the are not already products with that id
-    //     let products = this.getProducts();
-    //     if (products.some(prod => prod.id === product.id)){
-    //         console.log("Error: El código ingresado ya existe en otro producto.");
-    //         return 1;
-    //         }
+        if (cartIndexToUpdate === -1){
+            console.log("Error: No existe un carrito con ese id.");
+            return 1;
+        }
 
-    //     // Get current id
-    //     let currentId = ProductManager.productIdCounter;
-    //     if (products) {
-    //         currentId = products.reduce((max, prod) => (prod.id > max ? prod.id : max), 0);
-    //         ProductManager.productIdCounter = currentId;
-    //     }
+        // Check if that product exists, if it does, it should increase quantity, else, it should add it to the array
+        let productIndexToUpdate = carts[cartIndexToUpdate].products.findIndex(prod => prod.id === pid);
 
-    //     // Increment ID counter
-    //     ProductManager.productIdCounter += 1;
+        // Check if the requested product exists
+        if (productIndexToUpdate === -1) {
+            carts[cartIndexToUpdate].products.push({'id': pid, 'quantity': 1});
+        } else {
+            carts[cartIndexToUpdate].products[productIndexToUpdate].quantity += 1;
+        }
 
-    //     // Set product id
-    //     product.id = ProductManager.productIdCounter;
-
-    //     // Append product to products list
-    //     products.push(product);
-
-    //     // Save new product list into the file
-    //     this.save(products);
-    // }
+        // Save new product list into the file
+        this.save(carts);
+    }
 
 
     // Methods to work with files
@@ -116,31 +106,41 @@ class CartManager {
 
 // Testing
 
-// 1. Se creará una instancia de la clase "CartManager"
-const cartsURL = './carritos.json'
-const manager = new CartManager(cartsURL);
+// // 1. Se creará una instancia de la clase "CartManager"
+// const cartsURL = './carritos.json'
+// const manager = new CartManager(cartsURL);
 
-// 2. Se llamará “getCarts” recién creada la instancia, debe devolver un arreglo vacío []
-let currentCarts = manager.getCarts();
-console.log('Lista de carritos:', currentCarts);
+// // 2. Se llamará “getCarts” recién creada la instancia, debe devolver un arreglo vacío []
+// let currentCarts = manager.getCarts();
+// console.log('Lista de carritos:', currentCarts);
 
-// 3. Creo dos carritos.
-let cart1 = {'id': 1, 'quantity':1}
-let cart2 = {'id': 2, 'quantity':1}
+// // 3. Creo dos carritos.
+// let cart1 = {'id': 1, 'quantity':1}
+// let cart2 = {'id': 2, 'quantity':1}
+// let cart3 = [{'id': 1, 'quantity':1}, {'id': 2, 'quantity':1}]
 
-let cart3 = [{'id': 1, 'quantity':1}, {'id': 2, 'quantity':1}]
+// manager.createCart(cart1);
+// manager.createCart(cart2);
+// manager.createCart(cart3);
+// currentCarts = manager.getCarts();
+// console.log('Lista de carritos:', currentCarts);
 
-manager.createCart(cart1);
-manager.createCart(cart2);
-manager.createCart(cart3);
-currentCarts = manager.getCarts();
-console.log('Lista de carritos:', currentCarts);
+// // 4. Mostrar los productos de ese carrito
+// let id = 1;
+// let productos = manager.getCartById(id);
+// console.log(`Los productos asociados al carrito de id ${id}, son: `, productos);
 
-// 4. Mostrar los productos de ese carrito
-let id = 1;
-let productos = manager.getCartById(id);
-console.log(`Los productos asociados al carrito de id ${id}, son: `, productos);
+// // 5.1 Agregar un producto a un carrito
+// id = 1
+// let cart4 = 99
+// manager.addProduct(id, cart4);
+// console.log('Lista de carritos:', currentCarts);
 
+// // 5.1 Agregar un producto existente a un carrito
+// id = 3
+// let cart5 = 2
+// manager.addProduct(id, cart5);
+// console.log('Lista de carritos:', currentCarts);
 
 module.exports = CartManager;
-// export default CartManager;
+// // export default CartManager;
