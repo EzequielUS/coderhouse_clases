@@ -32,8 +32,19 @@ productRouter.post("/", (req, res) => {
     }
 })
 
-productRouter.put("/:pid", (req, res) => {})
+productRouter.put("/:pid", (req, res) => {
+    product = req.body;
+    let pid = parseInt(req.params.pid)
+    manager.updateProduct(pid, product)
+    res.status(200).json({ success: true, message: product });
+})
 
-productRouter.delete("/:pid", (req, res) => {})
+
+productRouter.delete("/:pid", (req, res) => {
+    let pid = parseInt(req.params.pid)
+    manager.deleteProduct(pid)
+    res.status(200).json({ success: true, message: product });
+})
+
 
 module.exports = productRouter;

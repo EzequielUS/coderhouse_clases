@@ -9,7 +9,7 @@ class ProductManager {
 
     addProduct(product) {
         // Check that the product meets all the requested fields
-        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
+        if (!product.title || !product.description || !product.price || !product.category || !product.code || !product.stock || !product.status) {
             console.log("Error: Todos los campos son obligatorios.");
             return 1;
         }
